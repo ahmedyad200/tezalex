@@ -1399,5 +1399,4 @@ else
 send(msg.chat_id_, msg.id_,'لا تمتلك صوره في حسابك او لم تقم بي عمل start في البوت', 1, 'md')
   end end
 tdcli_function ({ ID = "GetUserProfilePhotos", user_id_ = msg.sender_user_id_, offset_ = 0, limit_ = 1 }, getpro, nil)
-end
 end -- نهايه سورس التواصل كتابه أحمد عياد [@DV_AD1] 
