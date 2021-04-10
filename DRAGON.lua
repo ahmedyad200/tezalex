@@ -1099,16 +1099,6 @@ send(msg.chat_id_, msg.id_,' ✪︙ ارسل الكلمه تريد مسحها')
 database:set(bot_id..'Set:On'..msg.sender_user_id_..':'..msg.chat_id_,true)
 return false 
 end
-if text and not database:get(bot_id..'Reply:Sudo'..msg.chat_id_) then
-if not database:sismember(bot_id..'Spam:Texting'..msg.sender_user_id_,text) then
-local anemi = database:get(bot_id.."Add:Rd:Sudo:Gif"..text)   
-local veico = database:get(bot_id.."Add:Rd:Sudo:vico"..text)   
-local stekr = database:get(bot_id.."Add:Rd:Sudo:stekr"..text)     
-local text1 = database:get(bot_id.."Add:Rd:Sudo:Text"..text)   
-local photo = database:get(bot_id.."Add:Rd:Sudo:Photo"..text)
-local video = database:get(bot_id.."Add:Rd:Sudo:Video"..text)
-local document = database:get(bot_id.."Add:Rd:Sudo:File"..text)
-local audio = database:get(bot_id.."Add:Rd:Sudo:Audio"..text)
 ------------------------------------------------------------------------
 if text == 'تفعيل الردود' and Manager(msg) then   
 if database:get(bot_id..'Reply:Sudo'..msg.chat_id_) then
