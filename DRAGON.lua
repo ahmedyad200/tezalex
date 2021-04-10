@@ -169,7 +169,6 @@ end
 end  
 return DRAGON  
 end 
-
 function regexx(data)
 local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
@@ -508,12 +507,11 @@ end
 return false
 end
 if DevSoFi(msg) then
-local bl = ' ✪︙ اهلا عزيزي آلمـطـور'
+local bl = 'اهلا عزيزي المطور تم تفعيل التواصل'
 local keyboard = {
 {'ضع كليشه ستارت ✪','مسح كليشه ستارت ✪'},
 {'مسح رد','اضف رد'},
 {'اذاعه ✪','اذاعه خاص ✪'},
-{'تغير رساله الاشتراك','مسح رساله الاشتراك ✪','تغير الاشتراك'},
 {'الغاء الحظر','حظر'},
 {'اذاعه بالتوجيه ✪','اذاعه بالتوجيه خاص ✪'},
 {'تفعيل الاشتراك الاجباري ✪','تعطيل الاشتراك الاجباري ✪'},
@@ -529,7 +527,7 @@ local start = database:get(bot_id.."Start:Bot")
 if start then 
 SourceDRAGONr = start
 else
-SourceDRAGONr = ' ✪︙ اهلا عزيزي\n ✪︙ انا بوت\n[ ✪︙ معرف المطور ['..UserName..']'
+SourceDRAGONr = ' ✪︙ اهلا عزيزي\n ✪︙ انا بوت تواصل\n[ ✪︙ معرف المطور ['..UserName..']'
 end 
 send(msg.chat_id_, msg.id_, SourceDRAGONr) 
 end
@@ -861,17 +859,6 @@ return false
 end
 end,nil)
 end
-if database:get(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then 
-if text and text:match("^الغاء$") then 
-send(msg.chat_id_, msg.id_, " ✪︙ تم الغاء الامر ")
-database:del(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
-return false  end 
-database:del(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
-local texxt = string.match(text, "(.*)") 
-database:set(bot_id..'text:ch:user',texxt)
-send(msg.chat_id_, msg.id_,' ✪︙ تم تغيير رسالة الاشتراك ')
-end
-
 local status_welcome = database:get(bot_id..'Chek:Welcome'..msg.chat_id_)
 if status_welcome and not database:get(bot_id..'lock:tagservr'..msg.chat_id_) then
 if msg.content_.ID == "MessageChatJoinByLink" then
@@ -887,7 +874,7 @@ t = t:gsub('user',('@'..result.username_ or 'لا يوجد'))
 send(msg.chat_id_, msg.id_,'['..t..']')
 end,nil) 
 end 
-end 
+end
 --------------------------------------------------------------------------------------------------------------
 if msg.content_.photo_ then  
 if database:get(bot_id..'Change:Chat:Photo'..msg.chat_id_..':'..msg.sender_user_id_) then 
@@ -913,21 +900,6 @@ end
 end
 -------------------------------------------------------------------------------------------------------------ـ
 if text and text:match("^تغير الاشتراك$") and DevSoFi(msg) then  
-database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
-send(msg.chat_id_, msg.id_, ' ✪︙ حسنآ ارسل لي معرف القناة')
-return false  
-end
-if text and text:match("^تغير رساله الاشتراك$") and DevSoFi(msg) then  
-database:setex(bot_id.."textch:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
-send(msg.chat_id_, msg.id_, ' ✪︙ حسنآ ارسل لي النص الذي تريده')
-return false  
-end
-if text == "مسح رساله الاشتراك ✪" and DevSoFi(msg) then  
-database:del(bot_id..'text:ch:user')
-send(msg.chat_id_, msg.id_, " ✪︙ تم مسح رساله الاشتراك ")
-return false  
-end
-if text and text:match("^وضع قناة الاشتراك ✪$") and DevSoFi(msg) then  
 database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
 send(msg.chat_id_, msg.id_, ' ✪︙ حسنآ ارسل لي معرف القناة')
 return false  
