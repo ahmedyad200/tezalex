@@ -1003,19 +1003,6 @@ text = " ✪︙ لا يوجد ردود للبوت"
 end
 send(msg.chat_id_, msg.id_,'['..text..']')
 end
-if text or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.animation_ or msg.content_.audio_ or msg.content_.document_ or msg.content_.photo_ or msg.content_.video_ then  
-local test = database:get(bot_id..'Text:Sudo:Bot'..msg.sender_user_id_..':'..msg.chat_id_)
-if database:get(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_) == 'true1' then
-database:del(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_)
-if msg.content_.sticker_ then   
-database:set(bot_id.."Add:Rd:Sudo:stekr"..test, msg.content_.sticker_.sticker_.persistent_id_)  
-end   
-if msg.content_.voice_ then  
-database:set(bot_id.."Add:Rd:Sudo:vico"..test, msg.content_.voice_.voice_.persistent_id_)  
-end   
-if msg.content_.animation_ then   
-database:set(bot_id.."Add:Rd:Sudo:Gif"..test, msg.content_.animation_.animation_.persistent_id_)  
-end  
 if text then   
 text = text:gsub('"','') 
 text = text:gsub("'",'') 
@@ -1049,7 +1036,6 @@ database:set(bot_id.."Add:Rd:Sudo:Photo"..test, photo_in_group)
 end
 send(msg.chat_id_, msg.id_,' ✪︙ تم حفظ الرد')
 return false  
-end  
 end
 if text and text:match("^(.*)$") then
 if database:get(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_) == 'true' then
