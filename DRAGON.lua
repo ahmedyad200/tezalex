@@ -1036,7 +1036,7 @@ database:set(bot_id.."Add:Rd:Sudo:Photo"..test, photo_in_group)
 end
 send(msg.chat_id_, msg.id_,' ✪︙ تم حفظ الرد')
 return false  
-end
+
 end
 if text and text:match("^(.*)$") then
 if database:get(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_) == 'true' then
