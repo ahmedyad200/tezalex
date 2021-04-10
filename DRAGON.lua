@@ -1128,3 +1128,4 @@ Text = '\n ✪︙ بالتاكيد تم تعطيل الردود'
 end
 send(msg.chat_id_, msg.id_,Text) 
 end -- نهايه سورس التواصل كتابه أحمد عياد [@DV_AD1] 
+end
