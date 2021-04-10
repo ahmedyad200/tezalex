@@ -963,7 +963,7 @@ send(msg.chat_id_, msg.id_, " ✪︙ لا يوجد قناة في الاشترا�
 end
 return false  
 end
-en
+end
 
 if text == ("مسح الردود") and DevSoFi(msg) then 
 local list = database:smembers(bot_id..'List:Rd:Sudo')
