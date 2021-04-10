@@ -1338,8 +1338,6 @@ if photo then
 sendPhoto(msg.chat_id_, msg.id_, 0, 1, nil,photo,photo_caption)
 database:sadd(bot_id..'Spam:Texting'..msg.sender_user_id_,text) 
 end  
-end
-end
 
 -------------------------------
 if text == 'تفعيل ردود البوت' and Manager(msg) then   
