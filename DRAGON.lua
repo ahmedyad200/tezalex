@@ -674,27 +674,12 @@ database:setex(bot_id..'Set:Name:Bot'..msg.sender_user_id_,300,true)
 send(msg.chat_id_, msg.id_," ✪︙ ارسل اليه الاسم الان ")
 return false
 end
-if text=="اذاعه خاص ✪" and msg.reply_to_message_id_ == 0 and DevSoFi(msg) then 
+if text=="اذاعه ✪" and msg.reply_to_message_id_ == 0 and DevSoFi(msg) then 
 database:setex(bot_id.."Send:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
 send(msg.chat_id_, msg.id_," ✪︙ ارسل الان اذاعتك؟ \n ✪︙ للخروج ارسل الغاء ")
 return false
 end 
-if text=="اذاعه ✪" and msg.reply_to_message_id_ == 0 and DevSoFi(msg) then 
-database:setex(bot_id.."Send:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
-send(msg.chat_id_, msg.id_," ✪︙ ارسل الان اذاعتك؟ \n ✪︙ للخروج ارسل الغاء ")
-return false
-end  
-if text=="اذاعه بالتثبيت ✪" and msg.reply_to_message_id_ == 0 and DevSoFi(msg) then 
-database:setex(bot_id.."Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
-send(msg.chat_id_, msg.id_," ✪︙ ارسل الان اذاعتك؟ \n ✪︙ للخروج ارسل الغاء ")
-return false
-end 
 if text=="اذاعه بالتوجيه ✪" and msg.reply_to_message_id_ == 0  and DevSoFi(msg) then 
-database:setex(bot_id.."Send:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
-send(msg.chat_id_, msg.id_," ✪︙ ارسل لي التوجيه الان")
-return false
-end 
-if text=="اذاعه بالتوجيه خاص ✪" and msg.reply_to_message_id_ == 0  and DevSoFi(msg) then 
 database:setex(bot_id.."Send:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
 send(msg.chat_id_, msg.id_," ✪︙ ارسل لي التوجيه الان")
 return false
@@ -827,38 +812,6 @@ send(msg.chat_id_, msg.id_," ✪︙ تمت الاذاعه الى >>{"..#list.."}
 database:del(bot_id.."Send:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
 end 
 end
-if database:get(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then 
-if text and text:match("^الغاء$") then 
-send(msg.chat_id_, msg.id_, " ✪︙ تم الغاء الامر ")
-database:del(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
-return false  end 
-database:del(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_)  
-local username = string.match(text, "@[%a%d_]+") 
-tdcli_function ({    
-ID = "SearchPublicChat",    
-username_ = username  
-},function(arg,data) 
-if data and data.message_ and data.message_ == "USERNAME_NOT_OCCUPIED" then 
-send(msg.chat_id_, msg.id_, ' ✪︙ المعرف لا يوجد فيه قناة')
-return false  end
-if data and data.type_ and data.type_.ID and data.type_.ID == 'PrivateChatInfo' then
-send(msg.chat_id_, msg.id_, ' ✪︙ عذا لا يمكنك وضع معرف حسابات في الاشتراك ')
-return false  end
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.is_supergroup_ == true then
-send(msg.chat_id_, msg.id_,' ✪︙ عذا لا يمكنك وضع معرف جروب بالاشتراك ')
-return false  end
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.is_supergroup_ == false then
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.ID and data.type_.channel_.status_.ID == 'ChatMemberStatusEditor' then
-send(msg.chat_id_, msg.id_,' ✪︙ البوت ادمن في القناة \n ✪︙ تم تفعيل الاشتراك الاجباري في \n ✪︙ ايدي القناة ('..data.id_..')\n ✪︙ معرف القناة ([@'..data.type_.channel_.username_..'])')
-database:set(bot_id..'add:ch:id',data.id_)
-database:set(bot_id..'add:ch:username','@'..data.type_.channel_.username_)
-else
-send(msg.chat_id_, msg.id_,' ✪︙ عذرآ البوت ليس ادمن بالقناه ')
-end
-return false  
-end
-end,nil)
-end
 local status_welcome = database:get(bot_id..'Chek:Welcome'..msg.chat_id_)
 if status_welcome and not database:get(bot_id..'lock:tagservr'..msg.chat_id_) then
 if msg.content_.ID == "MessageChatJoinByLink" then
@@ -867,7 +820,7 @@ local GetWelcomeGroup = database:get(bot_id..'Get:Welcome:Group'..msg.chat_id_)
 if GetWelcomeGroup then 
 t = GetWelcomeGroup
 else  
-t = '\n• نورت حبي \n•  name \n• user' 
+t = '\n• نورت البوت يا قلبي \n•  name \n• user' 
 end 
 t = t:gsub('name',result.first_name_) 
 t = t:gsub('user',('@'..result.username_ or 'لا يوجد')) 
@@ -875,62 +828,6 @@ send(msg.chat_id_, msg.id_,'['..t..']')
 end,nil) 
 end 
 end
---------------------------------------------------------------------------------------------------------------
-if msg.content_.photo_ then  
-if database:get(bot_id..'Change:Chat:Photo'..msg.chat_id_..':'..msg.sender_user_id_) then 
-if msg.content_.photo_.sizes_[3] then  
-photo_id = msg.content_.photo_.sizes_[3].photo_.persistent_id_ 
-else 
-photo_id = msg.content_.photo_.sizes_[0].photo_.persistent_id_ 
-end 
-tdcli_function ({ID = "ChangeChatPhoto",chat_id_ = msg.chat_id_,photo_ = getInputFile(photo_id) }, function(arg,data)   
-if data.code_ == 3 then
-send(msg.chat_id_, msg.id_,' ✪︙ عذرآ البوت ليس ادمن بالقناه ')
-database:del(bot_id..'Change:Chat:Photo'..msg.chat_id_..':'..msg.sender_user_id_) 
-return false  end
-if data.message_ == "CHAT_ADMIN_REQUIRED" then 
-send(msg.chat_id_, msg.id_,' ✪︙ … عذرآ البوت لايملك صلاحيات')
-database:del(bot_id..'Change:Chat:Photo'..msg.chat_id_..':'..msg.sender_user_id_) 
-else
-send(msg.chat_id_, msg.id_,' ✪︙ تم تغيير صورة الجروب')
-end
-end, nil) 
-database:del(bot_id..'Change:Chat:Photo'..msg.chat_id_..':'..msg.sender_user_id_) 
-end   
-end
--------------------------------------------------------------------------------------------------------------ـ
-if text and text:match("^تغير الاشتراك$") and DevSoFi(msg) then  
-database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
-send(msg.chat_id_, msg.id_, ' ✪︙ حسنآ ارسل لي معرف القناة')
-return false  
-end
-if text == "تفعيل الاشتراك الاجباري ✪" and DevSoFi(msg) then  
-if database:get(bot_id..'add:ch:id') then
-local addchusername = database:get(bot_id..'add:ch:username')
-send(msg.chat_id_, msg.id_," ✪︙ الاشتراك الاجباري مفعل \n ✪︙ على القناة » ["..addchusername.."]")
-else
-database:setex(bot_id.."add:ch:jm" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 360, true)  
-send(msg.chat_id_, msg.id_," ✪︙ اهلا عزيزي المطور \n ✪︙ ارسل الان معرف قناتك")
-end
-return false  
-end
-if text == "تعطيل الاشتراك الاجباري ✪" and DevSoFi(msg) then  
-database:del(bot_id..'add:ch:id')
-database:del(bot_id..'add:ch:username')
-send(msg.chat_id_, msg.id_, " ✪︙ تم تعطيل الاشتراك الاجباري ")
-return false  
-end
-if text == "الاشتراك الاجباري ✪" and DevSoFi(msg) then  
-if database:get(bot_id..'add:ch:username') then
-local addchusername = database:get(bot_id..'add:ch:username')
-send(msg.chat_id_, msg.id_, " ✪︙ تم تفعيل الاشتراك الاجباري \n ✪︙ على القناة » ["..addchusername.."]")
-else
-send(msg.chat_id_, msg.id_, " ✪︙ لا يوجد قناة في الاشتراك الاجباري ")
-end
-return false  
-end
-end
-
 if text == ("مسح الردود") and DevSoFi(msg) then 
 local list = database:smembers(bot_id..'List:Rd:Sudo')
 for k,v in pairs(list) do
