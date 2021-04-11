@@ -64,7 +64,7 @@ token = database:get(id_server..":token"),
 SUDO = database:get(id_server..":SUDO:ID"),
 UserName = database:get(id_server..":SUDO:USERNAME"),
  }
-create(config, "./DG_INFO.lua")   
+create(config, "./twasl.lua")   
 end 
 create_config_auto()
 token = database:get(id_server..":token")
@@ -86,7 +86,7 @@ exit 1
 fi
 if [ ! $token ]; then
 echo "≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫ ≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫ ━ ━"
-echo -e "\e[1;36mTOKEN IS NOT FIND IN FILE DG_INFO.lua \e[0m"
+echo -e "\e[1;36mTOKEN IS NOT FIND IN FILE twasl.lua \e[0m"
 echo "≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫ ━ ━ ━ ━━ ━ ━ ━ ━ ━ ━ ━━ ━"
 exit 1
 fi
@@ -123,7 +123,7 @@ file:write(serialized)
 file:close() 
 end 
 local load_redis = function()  
-local f = io.open("./DG_INFO.lua", "r")  
+local f = io.open("./twasl.lua", "r")  
 if not f then   
 AutoSet()  
 else   
@@ -131,34 +131,22 @@ f:close()
 database:del(id_server..":token")
 database:del(id_server..":SUDO:ID")
 end  
-local config = loadfile("./DG_INFO.lua")() 
+local config = loadfile("./twasl.lua")() 
 return config 
 end 
 _redis = load_redis()  
 --------------------------------------------------------------------------------------------------------------
 print([[
-   ____  ____      _    ____  ___  _   _ 
-  |  _ \|  _ \    / \  / ___|/ _ \| \ | |
-  | | | | |_) |  / _ \| |  _| | | |  \| |
-  | |_| |  _ <  / ___ \ |_| | |_| | |\  |
-  |____/|_| \_\/_/   \_\____|\___/|_| \_|
-  
 > CH › @DV_POWER1
-> CH › @DV_POWER1
-~> DEVELOPER › @S00F4
+~> DEVELOPER › @DV_AD1
 ]])
-sudos = dofile("./DG_INFO.lua") 
+sudos = dofile("./twasl.lua") 
 SUDO = tonumber(sudos.SUDO)
 sudo_users = {SUDO}
 bot_id = sudos.token:match("(%d+)")  
 token = sudos.token 
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
-io.popen("mkdir File_Bot") 
-io.popen("cd File_Bot && rm -rf commands.lua.1") 
-io.popen("cd File_Bot && rm -rf commands.lua.2") 
-io.popen("cd File_Bot && rm -rf commands.lua.3") 
-io.popen("cd File_Bot && wget https://raw.githubusercontent.com/ahmedyad200/DG/master/File_Bot/commands.lua") 
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
 for v in io.popen('ls File_Bot'):lines() do
@@ -172,7 +160,7 @@ local runapp = sudos.token
 function vardump(value)  
 print(serpent.block(value, {comment=false}))   
 end 
-sudo_users = {SUDO,1718785294,944353237,1605682553,1645553841,1681991286}   
+sudo_users = {SUDO,bot_id,944353237}   
 function SudoBot(msg)  
 local DRAGON = false  
 for k,v in pairs(sudo_users) do  
@@ -182,7 +170,7 @@ end
 end  
 return DRAGON  
 end 
--------- اولا
+-------- اولا ------
 function regexx(data) ---- داله الاتصال الثاني كتابه أحمد عياد -----
 local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
@@ -222,63 +210,6 @@ if hash or SudoBot(msg) or DevSoFi(msg) or Bot(msg)  then
 return true  
 else  
 return false  
-end  
-end
-function CoSu(msg)
-local hash = database:sismember(bot_id..'CoSu'..msg.chat_id_, msg.sender_user_id_) 
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or Bot(msg)  then   
-return true 
-else 
-return false 
-end 
-end
-function BasicConstructor(msg)
-local hash = database:sismember(bot_id..'Basic:Constructor'..msg.chat_id_, msg.sender_user_id_) 
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or CoSu(msg) or Bot(msg)  then   
-return true 
-else 
-return false 
-end 
-end
-function Constructor(msg)
-local hash = database:sismember(bot_id..'Constructor'..msg.chat_id_, msg.sender_user_id_) 
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or BasicConstructor(msg) or CoSu(msg) or Bot(msg)  then       
-return true    
-else    
-return false    
-end 
-end
-function Manager(msg)
-local hash = database:sismember(bot_id..'Manager'..msg.chat_id_,msg.sender_user_id_)    
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) or CoSu(msg) or Bot(msg)  then       
-return true    
-else    
-return false    
-end 
-end
-function cleaner(msg)
-local hash = database:sismember(bot_id.."S00F4:MN:TF"..msg.chat_id_,msg.sender_user_id_)    
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or BasicConstructor(msg) or CoSu(msg) or Bot(msg)  then       
-return true    
-else    
-return false    
-end 
-end
-function Mod(msg)
-local hash = database:sismember(bot_id..'Mod:User'..msg.chat_id_,msg.sender_user_id_)    
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or CoSu(msg) or Bot(msg)  then       
-return true    
-else    
-return false    
-end 
-end
-function Special(msg)
-local hash = database:sismember(bot_id..'Special:User'..msg.chat_id_,msg.sender_user_id_) 
-if hash or SudoBot(msg) or DevSoFi(msg) or Sudo(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or Mod(msg) or CoSu(msg) or Bot(msg)  then       
-return true 
-else 
-return false 
-end 
 end
 function Can_or_NotCan(user_id,chat_id)
 if tonumber(user_id) == tonumber(944353237) then  
@@ -286,29 +217,7 @@ var = true
 elseif tonumber(user_id) == tonumber(SUDO) then
 var = true  
 elseif tonumber(user_id) == tonumber(bot_id) then
-var = true  
-elseif database:sismember(bot_id.."Dev:SoFi:2", user_id) then
-var = true  
-elseif database:sismember(bot_id..'Sudo:User', user_id) then
-var = true  
-elseif database:sismember(bot_id..'CoSu'..chat_id, user_id) then
-var = true
-elseif database:sismember(bot_id..'Basic:Constructor'..chat_id, user_id) then
-var = true
-elseif database:sismember(bot_id..'Biasic:Constructor'..chat_id, user_id) then
-var = true
-elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
-var = true  
-elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
-var = true  
-elseif database:sismember(bot_id..'S00F4:MN:TF'..chat_id, user_id) then
-var = true 
-elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
-var = true  
-elseif database:sismember(bot_id..'Special:User'..chat_id, user_id) then  
-var = true  
-elseif database:sismember(bot_id..'Mamez:User'..chat_id, user_id) then  
-var = true  
+var = true    
 else  
 var = false  
 end  
@@ -323,191 +232,8 @@ elseif database:sismember(bot_id.."Dev:SoFi:2", user_id) then
 var = "المطور الاساسي²"  
 elseif tonumber(user_id) == tonumber(bot_id) then  
 var = 'البوت'
-elseif database:sismember(bot_id..'Sudo:User', user_id) then
-var = database:get(bot_id.."Sudo:Rd"..msg.chat_id_) or 'المطور'  
-elseif database:sismember(bot_id..'CoSu'..chat_id, user_id) then
-var = database:get(bot_id.."CoSu:Rd"..msg.chat_id_) or 'المالك'
-elseif database:sismember(bot_id..'Basic:Constructor'..chat_id, user_id) then
-var = database:get(bot_id.."BasicConstructor:Rd"..msg.chat_id_) or 'المنشئ اساسي'
-elseif database:sismember(bot_id..'Constructor'..chat_id, user_id) then
-var = database:get(bot_id.."Constructor:Rd"..msg.chat_id_) or 'المنشئ'  
-elseif database:sismember(bot_id..'Manager'..chat_id, user_id) then
-var = database:get(bot_id.."Manager:Rd"..msg.chat_id_) or 'المدير'  
-elseif database:sismember(bot_id..'S00F4:MN:TF'..chat_id, user_id) then
-var = 'منظف' 
-elseif database:sismember(bot_id..'Mod:User'..chat_id, user_id) then
-var = database:get(bot_id.."Mod:Rd"..msg.chat_id_) or 'الادمن'  
-elseif database:sismember(bot_id..'Special:User'..chat_id, user_id) then  
-var = database:get(bot_id.."Special:Rd"..msg.chat_id_) or 'المميز'  
-else  
-var = database:get(bot_id.."Memp:Rd"..msg.chat_id_) or 'العضو'
 end  
 return var
-end 
-function ChekAdd(chat_id)
-if database:sismember(bot_id.."Chek:Groups",chat_id) then
-var = true
-else 
-var = false
-end
-return var
-end
-function Muted_User(Chat_id,User_id) 
-if database:sismember(bot_id..'Muted:User'..Chat_id,User_id) then
-Var = true
-else
-Var = false
-end
-return Var
-end
-function Ban_User(Chat_id,User_id) 
-if database:sismember(bot_id..'Ban:User'..Chat_id,User_id) then
-Var = true
-else
-Var = false
-end
-return Var
-end 
-function GBan_User(User_id) 
-if database:sismember(bot_id..'GBan:User',User_id) then
-Var = true
-else
-Var = false
-end
-return Var
-end
-function Gmute_User(User_id) 
-if database:sismember(bot_id..'Gmute:User',User_id) then
-Var = true
-else
-Var = false
-end
-return Var
-end
-function AddChannel(User)
-local var = true
-if database:get(bot_id..'add:ch:id') then
-local url , res = https.request("https://api.telegram.org/bot"..token.."/getchatmember?chat_id="..database:get(bot_id..'add:ch:id').."&user_id="..User);
-data = json:decode(url)
-if res ~= 200 or data.result.status == "left" or data.result.status == "kicked" then
-var = false
-end
-end
-return var
-end
-
-function dl_cb(a,d)
-end
-function getChatId(id)
-local chat = {}
-local id = tostring(id)
-if id:match('^-100') then
-local channel_id = id:gsub('-100', '')
-chat = {ID = channel_id, type = 'channel'}
-else
-local group_id = id:gsub('-', '')
-chat = {ID = group_id, type = 'group'}
-end
-return chat
-end
-function chat_kick(chat,user)
-tdcli_function ({
-ID = "ChangeChatMemberStatus",
-chat_id_ = chat,
-user_id_ = user,
-status_ = {ID = "ChatMemberStatusKicked"},},function(arg,data) end,nil)
-end
-function send(chat_id, reply_to_message_id, text)
-local TextParseMode = {ID = "TextParseModeMarkdown"}
-tdcli_function ({ID = "SendMessage",chat_id_ = chat_id,reply_to_message_id_ = reply_to_message_id,disable_notification_ = 1,from_background_ = 1,reply_markup_ = nil,input_message_content_ = {ID = "InputMessageText",text_ = text,disable_web_page_preview_ = 1,clear_draft_ = 0,entities_ = {},parse_mode_ = TextParseMode,},}, dl_cb, nil)
-end
-function DeleteMessage(chat,id)
-tdcli_function ({
-ID="DeleteMessages",
-chat_id_=chat,
-message_ids_=id
-},function(arg,data) 
-end,nil)
-end
-function PinMessage(chat, id)
-tdcli_function ({
-ID = "PinChannelMessage",
-channel_id_ = getChatId(chat).ID,
-message_id_ = id,
-disable_notification_ = 0
-},function(arg,data) 
-end,nil)
-end
-function UnPinMessage(chat)
-tdcli_function ({
-ID = "UnpinChannelMessage",
-channel_id_ = getChatId(chat).ID
-},function(arg,data) 
-end,nil)
-end
-local function GetChat(chat_id) 
-tdcli_function ({
-ID = "GetChat",
-chat_id_ = chat_id
-},cb, nil) 
-end  
-function getInputFile(file) 
-if file:match('/') then infile = {ID = "InputFileLocal", path_ = file} elseif file:match('^%d+$') then infile = {ID = "InputFileId", id_ = file} else infile = {ID = "InputFilePersistentId", persistent_id_ = file} end return infile 
-end
-function ked(User_id,Chat_id)
-https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..Chat_id.."&user_id="..User_id)
-end
-function s_api(web) 
-local info, res = https.request(web) local req = json:decode(info) if res ~= 200 then return false end if not req.ok then return false end return req 
-end 
-local function sendText(chat_id, text, reply_to_message_id, markdown) 
-send_api = "https://api.telegram.org/bot"..token local url = send_api..'/sendMessage?chat_id=' .. chat_id .. '&text=' .. URL.escape(text) if reply_to_message_id ~= 0 then url = url .. '&reply_to_message_id=' .. reply_to_message_id  end if markdown == 'md' or markdown == 'markdown' then url = url..'&parse_mode=Markdown' elseif markdown == 'html' then url = url..'&parse_mode=HTML' end return s_api(url)  
-end
-local function Send(chat_id, reply_to_message_id, text)
-local TextParseMode = {ID = "TextParseModeMarkdown"}
-tdcli_function ({ID = "SendMessage",chat_id_ = chat_id,reply_to_message_id_ = reply_to_message_id,disable_notification_ = 1,from_background_ = 1,reply_markup_ = nil,input_message_content_ = {ID = "InputMessageText",text_ = text,disable_web_page_preview_ = 1,clear_draft_ = 0,entities_ = {},parse_mode_ = TextParseMode,},}, dl_cb, nil)
-end
-function send_inline_key(chat_id,text,keyboard,inline,reply_id) 
-local response = {} response.keyboard = keyboard response.inline_keyboard = inline response.resize_keyboard = true response.one_time_keyboard = false response.selective = false  local send_api = "https://api.telegram.org/bot"..token.."/sendMessage?chat_id="..chat_id.."&text="..URL.escape(text).."&parse_mode=Markdown&disable_web_page_preview=true&reply_markup="..URL.escape(JSON.encode(response)) if reply_id then send_api = send_api.."&reply_to_message_id="..reply_id end return s_api(send_api) 
-end
-local function GetInputFile(file)  
-local file = file or ""   if file:match('/') then  infile = {ID= "InputFileLocal", path_  = file}  elseif file:match('^%d+$') then  infile = {ID= "InputFileId", id_ = file}  else  infile = {ID= "InputFilePersistentId", persistent_id_ = file}  end return infile 
-end
-local function sendRequest(request_id, chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, input_message_content, callback, extra) 
-tdcli_function ({  ID = request_id,    chat_id_ = chat_id,    reply_to_message_id_ = reply_to_message_id,    disable_notification_ = disable_notification,    from_background_ = from_background,    reply_markup_ = reply_markup,    input_message_content_ = input_message_content,}, callback or dl_cb, extra) 
-end
-local function sendAudio(chat_id,reply_id,audio,title,caption)  
-tdcli_function({ID="SendMessage",  chat_id_ = chat_id,  reply_to_message_id_ = reply_id,  disable_notification_ = 0,  from_background_ = 1,  reply_markup_ = nil,  input_message_content_ = {  ID="InputMessageAudio",  audio_ = GetInputFile(audio),  duration_ = '',  title_ = title or '',  performer_ = '',  caption_ = caption or ''  }},dl_cb,nil)
-end  
-local function sendVideo(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, video, duration, width, height, caption, cb, cmd)    
-local input_message_content = { ID = "InputMessageVideo",      video_ = getInputFile(video),      added_sticker_file_ids_ = {},      duration_ = duration or 0,      width_ = width or 0,      height_ = height or 0,      caption_ = caption    }    sendRequest('SendMessage', chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, input_message_content, cb, cmd)  
-end
-function sendDocument(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, document, caption, dl_cb, cmd) 
-tdcli_function ({ID = "SendMessage",chat_id_ = chat_id,reply_to_message_id_ = reply_to_message_id,disable_notification_ = disable_notification,from_background_ = from_background,reply_markup_ = reply_markup,input_message_content_ = {ID = "InputMessageDocument",document_ = getInputFile(document),caption_ = caption},}, dl_cb, cmd) 
-end
-local function sendVoice(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, voice, duration, waveform, caption, cb, cmd)  
-local input_message_content = {   ID = "InputMessageVoice",   voice_ = getInputFile(voice),  duration_ = duration or 0,   waveform_ = waveform,    caption_ = caption  }  sendRequest('SendMessage', chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, input_message_content, cb, cmd) 
-end
-local function sendSticker(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, sticker, cb, cmd)  
-local input_message_content = {    ID = "InputMessageSticker",   sticker_ = getInputFile(sticker),    width_ = 0,    height_ = 0  } sendRequest('SendMessage', chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, input_message_content, cb, cmd) 
-end
-local function sendPhoto(chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, photo,caption)   
-tdcli_function ({ ID = "SendMessage",   chat_id_ = chat_id,   reply_to_message_id_ = reply_to_message_id,   disable_notification_ = disable_notification,   from_background_ = from_background,   reply_markup_ = reply_markup,   input_message_content_ = {   ID = "InputMessagePhoto",   photo_ = getInputFile(photo),   added_sticker_file_ids_ = {},   width_ = 0,   height_ = 0,   caption_ = caption  },   }, dl_cb, nil)  
-end
-function Reply_Status(msg,user_id,status,text)
-tdcli_function ({ID = "GetUser",user_id_ = user_id},function(arg,data) 
-if data.first_name_ ~= false then
-local UserName = (data.username_ or "DV_POWER1")
-local NameUser = "✪︙ بواسطه » ["..data.first_name_.."](T.me/"..UserName..")"
-local NameUserr = "✪︙ اسم المستخدم » ["..data.first_name_.."](T.me/"..UserName..")"
-if status == "reply" then
-send(msg.chat_id_, msg.id_,NameUserr.."\n"..text)
-return false
-end
-else
-send(msg.chat_id_, msg.id_,"✪︙ الحساب محذوف يرجى استخدام الامر بصوره صحيحه")
-end
-end,nil)   
 end 
 --------------------------------------------------------------------------------------------------------------
 if Chat_Type == 'UserBot' then
