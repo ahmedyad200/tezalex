@@ -424,5 +424,4 @@ local Users = database:scard(bot_id..'User_Bot')
 Text = '\n ✪︙ المشتركين»{`'..Users..'`}'
 send(msg.chat_id_, msg.id_,Text) 
 return false
-end -- end new msg dev.mr sofi 
-end -- end callback dev.mr sofi
+end --- كتابه أحمد عياد [@DV_AD1]
