@@ -531,7 +531,6 @@ SourceDRAGONr = ' ✪︙ اهلا عزيزي\n ✪︙ انا بوت تواصل\n
 end 
 send(msg.chat_id_, msg.id_, SourceDRAGONr) 
 end
-end
 database:setex(bot_id..'Start:Time'..msg.sender_user_id_,300,true)
 return false
 end
