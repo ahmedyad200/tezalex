@@ -283,6 +283,7 @@ end
 database:setex(bot_id..'Start:Time'..msg.sender_user_id_,300,true)
 return false
 end
+end
 if not DevSoFi(msg) and not database:sismember(bot_id..'Ban:User_Bot',msg.sender_user_id_) and not database:get(bot_id..'Tuasl:Bots') then
 send(msg.sender_user_id_, msg.id_,' ✪︙ تم ارسال رسالتك\n ✪︙ سيتم رد في اقرب وقت')
 tdcli_function ({ID = "ForwardMessages", chat_id_ = SUDO,    from_chat_id_ = msg.sender_user_id_,    message_ids_ = {[0] = msg.id_},    disable_notification_ = 1,    from_background_ = 1 },function(arg,data) 
@@ -424,4 +425,5 @@ local Users = database:scard(bot_id..'User_Bot')
 Text = '\n ✪︙ المشتركين»{`'..Users..'`}'
 send(msg.chat_id_, msg.id_,Text) 
 return false
-end --- كتابه أحمد عياد [@DV_AD1]
+end end --- كتابه أحمد عياد [@DV_AD1]
+---- end
