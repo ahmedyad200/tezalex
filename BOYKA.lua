@@ -6,12 +6,12 @@ JSON  = dofile("./library/dkjson.lua")
 URL = require('socket.url')  
 utf8 = require ('lua-utf8') 
 database = redis.connect('127.0.0.1', 6379) 
-id_server = --io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
-IP = --io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a'):gsub('[\n\r]+', '')
-Name = --io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a'):gsub('[\n\r]+', '')
-Port = --io.popen("echo ${SSH_CLIENT} | awk '{ port = $3 } END { print port }'"):read('*a'):gsub('[\n\r]+', '')
-Time = --io.popen("date +'%Y/%m/%d %T'"):read('*a'):gsub('[\n\r]+', '')
-whoami = --io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
+id_server = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
+IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a'):gsub('[\n\r]+', '')
+Name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a'):gsub('[\n\r]+', '')
+Port = io.popen("echo ${SSH_CLIENT} | awk '{ port = $3 } END { print port }'"):read('*a'):gsub('[\n\r]+', '')
+Time = io.popen("date +'%Y/%m/%d %T'"):read('*a'):gsub('[\n\r]+', '')
+whoami = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
 --------------------------------------------------------------------------------------------------------------
 local AutoSet = function() 
 local create = function(data, file, uglify)  
@@ -74,7 +74,7 @@ end
 create_config_auto()
 token = database:get(id_server..":token")
 SUDO = database:get(id_server..":SUDO:ID")
-install = --io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
+install = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
 print('\n\27[1;34m doneeeeeeee senddddddddddddd :')
 file = io.open("BOYKA", "w")  
 file:write([[
@@ -157,14 +157,14 @@ bot_id = sudos.token:match("(%d+)")
 token = sudos.token 
 --- start functions ↓
 --------------------------------------------------------------------------------------------------------------
---io.popen("mkdir File_Bot") 
---io.popen("cd File_Bot && rm -rf commands.lua.1") 
---io.popen("cd File_Bot && rm -rf commands.lua.2") 
---io.popen("cd File_Bot && rm -rf commands.lua.3") 
---io.popen("cd File_Bot && wget https://raw.githubusercontent.com/BOYKATEAM/Files_Boyka/master/File_Bot/commands.lua") 
+io.popen("mkdir File_Bot") 
+io.popen("cd File_Bot && rm -rf commands.lua.1") 
+io.popen("cd File_Bot && rm -rf commands.lua.2") 
+io.popen("cd File_Bot && rm -rf commands.lua.3") 
+io.popen("cd File_Bot && wget https://raw.githubusercontent.com/BOYKATEAM/Files_Boyka/master/File_Bot/commands.lua") 
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
-for v in --io.popen('ls File_Bot'):lines() do
+for v in io.popen('ls File_Bot'):lines() do
 if v:match(".lua$") then
 i = i + 1
 t = t.."\27[39m"..i.."\27[36m".." - \27[10;32m"..v..",\27[m \n"
@@ -789,7 +789,7 @@ end
 end,nil)   
 end  
 function plugin_Poyka(msg)
-for v in --io.popen('ls File_Bot'):lines() do
+for v in io.popen('ls File_Bot'):lines() do
 if v:match(".lua$") then
 plugin = dofile("File_Bot/"..v)
 if plugin.Poyka and msg then
@@ -1040,7 +1040,7 @@ database:del(bot_id..'Start:Bot')
 send(msg.chat_id_, msg.id_,' ❏تم حذف كليشه ستارت')
 end
 if text == 'معلومات السيرفر ❏' and DevBOYKAW(msg) then 
-send(msg.chat_id_, msg.id_, --io.popen([[
+send(msg.chat_id_, msg.id_, io.popen([[
 linux_version=`lsb_release -ds`
 memUsedPrc=`free -m | awk 'NR==2{printf "%sMB/%sMB {%.2f%}\n", $3,$2,$3*100/$2 }'`
 HardDisk=`df -lh | awk '{if ($6 == "/") { print $3"/"$2" ~ {"$5"}" }}'`
@@ -2959,7 +2959,7 @@ database:del(bot_id.."Set:Cmd:Group1"..msg.chat_id_..':'..msg.sender_user_id_)
 return false
 end
 if text == 'السيرفر' and SudoBot(msg) then 
-send(msg.chat_id_, msg.id_, --io.popen([[
+send(msg.chat_id_, msg.id_, io.popen([[
 linux_version=`lsb_release -ds`
 memUsedPrc=`free -m | awk 'NR==2{printf "%sMB/%sMB {%.2f%}\n", $3,$2,$3*100/$2 }'`
 HardDisk=`df -lh | awk '{if ($6 == "/") { print $3"/"$2" ~ {"$5"}" }}'`
@@ -4111,7 +4111,7 @@ end
 if text == 'الملفات' and DevBOYKAW(msg) then
 t = ' ❏ملفات السورس بويكا ↓\n≪━━━━━━𝗘𝗫━━━━━━≫ \n'
 i = 0
-for v in --io.popen('ls File_Bot'):lines() do
+for v in io.popen('ls File_Bot'):lines() do
 if v:match(".lua$") then
 i = i + 1
 t = t..i..'- الملف » {'..v..'}\n'
